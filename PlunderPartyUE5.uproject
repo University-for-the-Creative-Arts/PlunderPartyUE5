@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{48D459E2-47DA-4A24-B569-4692528B17BF}",
+	"EngineAssociation": "{B29E2411-4B0F-1212-250A-6685CC6CF885}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -32,6 +32,10 @@
 		},
 		{
 			"Name": "PCGGeometryScriptInterop",
+			"Enabled": true
+		},
+		{
+			"Name": "RawInput",
 			"Enabled": true
 		}
 	]
