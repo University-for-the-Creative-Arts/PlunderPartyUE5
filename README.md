@@ -121,18 +121,18 @@ For the volume slider, it changes the volume of the sound mix class, `Master`, w
 
 The scoreboard is the backbone of the score system. This is apart of `MENU_main`, and it displays the variables set in the `GI_PlunderParty` that keep track of each player's score. On construction of the the widget, it checks the number of players in `GI_PlunderParty`, and sets the visibility of the scoreboard to be consistent with the amount of players.
 
-![Alt text](./githubimgs/getscore.png"")  
+![Alt text](./githubimgs/getscore.png "")  
 [ Figure 8. MENU_Main GetText function for Player 1 score. Logic is identical for other players]
 
-![Alt text](./githubimgs/scoreboardvisibility.png"")  
+![Alt text](./githubimgs/scoreboardvisibility.png "")  
 [ Figure 9. MENU_Main visibility for the scoreboard to correspond to number of players ]
 
 On top of that, there is a function that displays the amount of players currently playing below the scoreboard title. This was originally for testing purposes of another player creation system that was scrapped, but it adds some visual polish so it was kept
 
-![Alt text](./githubimgs/playercount.png"")  
+![Alt text](./githubimgs/playercount.png "")  
 [ Figure 10. Playercount display code ]
 
-![Alt text](./githubimgs/scoreboard.png"")  
+![Alt text](./githubimgs/scoreboard.png "")  
 [ Figure 11. Scoreboard in MENU_Main ]
 
 This updates after every game, to show the current scores of all the players
@@ -143,28 +143,28 @@ The rest of the lobby related logic is in `MENU_main`, which is simply the rest 
 
 Each minigame has a button as an entry point to the level
 
-![Alt text](./githubimgs/button.png"")  
+![Alt text](./githubimgs/button.png "")  
 [ Figure 12. Mini-Game Button Code ]
 
 To go along with the game quality of life features added in the settings menu, a quit button was added to the title screen beneath the minigame buttons
 
-![Alt text](./githubimgs/quit.png"")  
+![Alt text](./githubimgs/quit.png "")  
 [ Figure 13. Quit Button Code ]
 
 Passingly, a game designer mentioned the functionality to add information menus for each of the games, so the following was done
 
 Next to each game button in the menu, a button is added that removes the main menu widget and replaces it with a widget that shows the tutorial for each mini game, which has a quit button to remove the tutorial and brings back the main menu. This would allow the game designers to explain each game's lore, objective and controls. However, despite being asked to make this feature by the game designers for them to use, actually writing out the tutorials was neglected by the designers
 
-![Alt text](./githubimgs/settingsmenu.png"")  
+![Alt text](./githubimgs/settingsmenu.png "")  
 [ Figure 14. The Main Menu ]
 
-![Alt text](./githubimgs/tutorial.png"")  
+![Alt text](./githubimgs/tutorial.png "")  
 [ Figure 15. Tutorial Menu, was not used by game designers ]
 
-![Alt text](./githubimgs/tutorialbutton.png"")  
+![Alt text](./githubimgs/tutorialbutton.png "")  
 [ Figure 16. Tutorial Button Code ]
 
-![Alt text](./githubimgs/tutorialquit.png"")  
+![Alt text](./githubimgs/tutorialquit.png "")  
 [ Figure 17 Tutorial Quit Button Code ]
 
 
@@ -178,20 +178,20 @@ How it works is that there is a delay, set to 1 second by default, which when co
 
 The delay can be changed, via the sails on the boat once interacted with, and when doing so, it divides the delay in by another variable; `delayMult`. This is a variable rather than a magic number to allow for game designers to quickly see the variable and have it change. Currently, it is set to 2.
 
-![Alt text](./githubimgs/timersubtract.png"")  
+![Alt text](./githubimgs/timersubtract.png "")  
 [ Figure 18 Timer Function up to the subtraction section ]
 
 After the logic of the timer subtracting, if the timer is not 0, it targets macros for spawning the threats, and then if the timer has hit 0, it calls a macro `sendScoresToGameInstance` and then brings the players back to the lobby.
 
-![Alt text](./githubimgs/timermacros.png"") 
+![Alt text](./githubimgs/timermacros.png "") 
 [ Figure 19 Timer Function calling macros ]
 
 Then, in `WB_UI`, it casts to `GM_STORM_STRIDER` to get `realTime` and then displays that to the screen
 
-![Alt text](./githubimgs/timergettext.png"") 
+![Alt text](./githubimgs/timergettext.png "") 
 [ Figure 20 Timer Get Text ]
 
-![Alt text](./githubimgs/timer.gif"") 
+![Alt text](./githubimgs/timer.gif "") 
 
 [ Figure 21. Timer Ticking Down ]
 
@@ -201,23 +201,23 @@ In `GM_STORM_STRIDER`, from `Event tick`, there is a macro called `hpDrain`. The
 
 Within `hpDrain`, it checks for how many actors of the classes `bp_Big_tentacle`, `bp_Tentacle` and `bp_Lightning`, top of just checking if any instance of`bp_Ship_Controls` has `sailsBroken` being true. With the actors it is checking for the amounts of, it gets the length of the actors of an array and adds them together to deal the damage necessary to the ship, and is then subtracted from the `shipHP`.
 
-![Alt text](./githubimgs/hparray.png"") 
+![Alt text](./githubimgs/hparray.png "") 
 
 [ Figure 22. hpDrain getting number of threats to calculate damage per second ]
 
 Then, the `shipHP` is turned into a percentage for UI purposes, and with that percentage, it is checked if the ship reaches 0% hp, the players instantly lose and are sent to the lobby 
 
-![Alt text](./githubimgs/hppercent.png"") 
+![Alt text](./githubimgs/hppercent.png "") 
 
 [ Figure 23. hpDrain turning the HP into a percentage for the UI ]
 
 Then, in `WB_UI`, it casts to `GM_STORM_STRIDER` to get `shipHPPercent`, formats the variable in text with a percentage and prefix, like such: `Ship HP : {shipHPPercent}%`, and then displays that to the screen
 
-![Alt text](./githubimgs/hpUI.png"") 
+![Alt text](./githubimgs/hpUI.png "") 
 
 [ Figure 24. WB_UI logic for getting the percentage ] 
 
-![Alt text](./githubimgs/hp.gif"") 
+![Alt text](./githubimgs/hp.gif "") 
 
 [ Figure 25. HP draining when threats are left unattended ] 
 
@@ -231,36 +231,36 @@ Then, in `BP_Storm_Strider_Character`, there are three relevant events: `On Comp
 
 In begin overlap, it checks if the actor overlapping with the player character implements the interface, and if it does, it calls the trigger for the Interact UI, and adds said actor to a table of all interactable Actors in range in the variable: `InteractablesInRange` 
 
-![Alt text](./githubimgs/beginoverlapcharacter.png"") 
+![Alt text](./githubimgs/beginoverlapcharacter.png "") 
 
 [ Figure 26. Begin Overlap in the Player character that add interactable to an array ]
 
 Then a function called `getActiveInteractable` gets `InteractablesInRange` and gets the most recent index in the table, and sets that to be the current interactable that the player is interacting with. This means the if there is 2 interactables in range, only the one that overlapped last will count as active.
 
-![Alt text](./githubimgs/getactiveinteractable.png"") 
+![Alt text](./githubimgs/getactiveinteractable.png "") 
 
 [ Figure 27. getActiveInteractable function ]
 
 
 End Overlap does the opposite of begin overlap. It removes the index of the interactable actor that stopped colliding with the player
 
-![Alt text](./githubimgs/endoverlapcharacter.png"") 
+![Alt text](./githubimgs/endoverlapcharacter.png "") 
 
 [ Figure 28. End Overlap in the Player character that removes interactables from  an array ]
 
 The last relevant event, the input action `IA_Hold_Interact`, simply runs the necessary code. As the button is held, `HoldNumber` increases incrementally by 10, and when it reaches 100, when the action is complete, or when the action is cancelled, it is set 0 multiple times. This was to bypass an issue where the number would keep resetting back to 10 as opposed to 0, so the code forces it at multiple times to be 0 as a band-aid fix
 
-![Alt text](./githubimgs/holdnumberstuff.png"") 
+![Alt text](./githubimgs/holdnumberstuff.png "") 
 
 [ Figure 29. IA_Hold_Interact related code for the number on the Interact UI ]
 
 When the input action is triggered, it gets the active interactable and passes that through the interface to the targeted actor. For the sake of explanation, since the code that comes after the interact interface was done by designers, `wb_woodpile` will be the example of how the interact works, but frankly, the interact interface works identically for all the other actors, it just simply triggering different logic. In the case of `wb_woodpile`, it gets the instance of the player via the `interactor` variable and casting to the player class, and makes the variable `Can repair` true.
 
-![Alt text](./githubimgs/woodpileinteract.png"") 
+![Alt text](./githubimgs/woodpileinteract.png "") 
 
 [ Figure 30. Woodpile Interact Event ]
 
-![Alt text](./githubimgs/interact.gif"") 
+![Alt text](./githubimgs/interact.gif "") 
 
 [ Figure 31. Woodpile Interact In-Game ]
 
@@ -272,38 +272,38 @@ So, using the new and improved interact interface, the system was redesigned to 
 
 In `BPI_Interactable`, there are two more functions, `EndOverlap` and `BeginOverlap`, which are called in `BP_Storm_Strider_Character`. Then, in any blueprint that is meant to be an interactable (as the code is all the same), they are given a component called `AC_InteractWidget`
 
-![Alt text](./githubimgs/beginoverlapcharacter.png"") 
+![Alt text](./githubimgs/beginoverlapcharacter.png "") 
 
 [ Figure 32. Begin Overlap in the Player character that calls `BeginOverlap` ]
 
-![Alt text](./githubimgs/endoverlapcharacter.png"") 
+![Alt text](./githubimgs/endoverlapcharacter.png "") 
 
 [ Figure 33. End Overlap in the Player character that calls `EndOverlap` ]
 
 `AC_InteractWidget` sets up the logic required to draw the widget itself, it adds a widget component, it sets the widget space, it sets the draw size, it calls `WB_Interact` as the class used, makes it invisible by default and then sets its location to the actor with the component. It has two custom events in it aswell: `Enable Widget` and `Disable Widget` which when called sets the visibility of the widget to be true or false, but also sets the index of the player making the widget visible.
 
-![Alt text](./githubimgs/acinteract.png"") 
+![Alt text](./githubimgs/acinteract.png "") 
 
 [ Figure 34. AC_InteractWidget Events]
 
 Then, in any blueprint that is meant to be interactable, for example `bp_woodpile` or `bp_lightning`, have the outputs of the events: `EndOverlap` and `BeginOverlap`. `EndOverlap` simply disables the widget via `Disable Widget`, while `BeginOverlap`, gets the controller of the interactor, which is a player, and then gets the ID of the interactor and enables the `WB_Interact` to spawn via `Enable Widget`
 
-![Alt text](./githubimgs/woodpileinteractui.png"") 
+![Alt text](./githubimgs/woodpileinteractui.png "") 
 
 [ Figure 35. Woodpile Interact UI events]
 
 `WB_Interact` then gets the player index set in `Enable Widget` to get the `HoldNumber` variable from the instance of `BP_Storm_Strider_Character` with the specified ID, and displays `HoldNumber`, and makes a progress bar with said number.
 
-![Alt text](./githubimgs/wbinteractpercent.png"") 
+![Alt text](./githubimgs/wbinteractpercent.png "") 
 
 [ Figure 36. Interact UI get percent]
 
 
-![Alt text](./githubimgs/wbinteracttext.png"") 
+![Alt text](./githubimgs/wbinteracttext.png "") 
 
 [ Figure 37. Interact UI get text]
 
-![Alt text](./githubimgs/interact.gif"")
+![Alt text](./githubimgs/interact.gif "")
 
 [ Figure 38. Woodpile showing Interact UI ]
 
@@ -313,11 +313,11 @@ The logic behind `BP_Cannon` was the only logic after the initial interact not d
 
 The interactor's score variable is accessed via the `interactor` variable and casting to the player class, and then it checks how many big tentacles are on the field, and then applying 2 score per each big tentacle. It then does the same the regular tentacles, but only gives 1 score per regular tentacle. It then destroys all of the tentacles on the field and calls `Disabled Widget` for the interact UI.
 
-![Alt text](./githubimgs/cannonss.png"")
+![Alt text](./githubimgs/cannonss.png "")
 
 [ Figure 39. Cannon code related to the killing of tentacles ]
 
-![Alt text](./githubimgs/cannonss.gif"")
+![Alt text](./githubimgs/cannonss.gif "")
 
 [ Figure 40. Cannon killing tentacles in action ]
 
@@ -329,20 +329,20 @@ In the widget blueprint, there are 8 functions pertaining to displaying the scor
 
 `GetPXCanRepair`, (with `x` standing for 1-4), it gets the `Can repair` variable by casing to `BP_Storm_Strider_Character`, and if true, it sets the text of the text box to be 'Can Repair', if not, it is set to empty.
 
-![Alt text](./githubimgs/p1canrepair.png"")
+![Alt text](./githubimgs/p1canrepair.png "")
 
 [ Figure 41. Getting the variable of can repair from the Player and formats it accordingly ]
 
 Similarly, `GetPXScore`, (with `x` standing for 1-4), it gets the `score` variable by casing to `BP_Storm_Strider_Character` and sets the integer value as the text
 
-![Alt text](./githubimgs/p1score.png"")
+![Alt text](./githubimgs/p1score.png "")
 
 [ Figure 42. Getting the variable of score from the Player ]
 
 
 When the widget is constructed, much like the scoreboard, it gets the number of players by casting to `GI_PlunderParty` and sets visibility of the UI in accordance to how many players have been selected.
 
-![Alt text](./githubimgs/ssvisibility.png"")
+![Alt text](./githubimgs/ssvisibility.png "")
 
 [ Figure 43. Setting visibility of UI elements depending how many players are active ]
 
@@ -352,7 +352,7 @@ In `GM_STORM_STRIDER`, once `realTime` reaches 0 in the `timer` macro, another m
 
 In `sendScoresToGameInstance`, it casts to `GI_PlunderParty` to get the total score variables, and then it casts to each instance of `BP_Storm_Strider_Character`, and then gets the score of each character, and adds that to the total score in the game instance
 
-![Alt text](./githubimgs/scoress.png"")
+![Alt text](./githubimgs/scoress.png "")
 
 [ Figure 44. sendScoresToGameInstance in Storm Strider ]
 
@@ -362,32 +362,32 @@ In `sendScoresToGameInstance`, it casts to `GI_PlunderParty` to get the total sc
 
 How scores are passed in the game begin in the actor `Course_Finish`. It gets the player that overlaps with it, and casts to `Land_Ahoy_Player_Character ` and `Land_Ahoy_Player_Controller`, and then sends over a reference to the player, and its index to an event; `Finished`
 
-![Alt text](./githubimgs/coursefinish.png"")
+![Alt text](./githubimgs/coursefinish.png "")
 
 [ Figure 45. Course_Finish Overlap getting variables and passing it to the player blueprint]
 
 In `Land_Ahoy_Player_Character`, `Finished` triggers code that checks if the player instance has finished the race, and if so, the reference and index are then passed to another event, `Finish`
 
-![Alt text](./githubimgs/playerfinish.png"")
+![Alt text](./githubimgs/playerfinish.png "")
 
 [ Figure 46. Land_Ahoy_Player_Character Finished event sending variables to GM_LandAhoy ]
 
 In `GM_LandAhoy`, `Finish` triggers code that deals with ending the game, but what is relevant to passing scores is the function `sendScoreToGameInstance`.
 
 
-![Alt text](./githubimgs/gmfinish.png"")
+![Alt text](./githubimgs/gmfinish.png "")
 
 [ Figure 47. GM_LandAhoy finishing the race and calling the function sendScoreToGameInstance ]
 
 The function casts to `GI_PlunderParty` to get the score variables of each player, and then there are 4 macros after that, which are all identical aside from the amount of score given. Each macro checks the place of player, and if its not the corresponding placement in the race, it moves on to the next macro
 
-![Alt text](./githubimgs/scoreLA.png"")
+![Alt text](./githubimgs/scoreLA.png "")
 
 [ Figure 48. sendScoreToGameInstance calling 4 macros to check what place the player is in ]
 
 If the corresponding placement is equal to what the macro is checking, it then checks the corresponding index of the player. Said index then determines which player score in the game instance it should target, then adds the score won by the players placement. 1st to 4th gets 4-1 score, and their values are stored in `1st-4thPlaceScores`, which are all integers
 
-![Alt text](./githubimgs/iffirstplace.png"")
+![Alt text](./githubimgs/iffirstplace.png "")
 
 [ Figure 49. ifFirstPlace checking which player is in first place ]
 
@@ -397,7 +397,7 @@ If the corresponding placement is equal to what the macro is checking, it then c
 Due to ***Land Ahoy*** having splitscreen, a issue occurred where after Land Ahoy ends and brings you back to the titlescreen, the split screen would stay. So in `LobbyGameMode`, in begin play, it simply sets fullscreen to be off
 
 
-![Alt text](./githubimgs/splitscreen.png"")
+![Alt text](./githubimgs/splitscreen.png "")
 
 [ Figure 50. LobbyGameMode disabling splitscreen ]
 
@@ -408,20 +408,20 @@ Due to ***Land Ahoy*** having splitscreen, a issue occurred where after Land Aho
 
 In `GM_WRECKAGE_RUMBL`, from `Event tick`, if the `deathToll` variable is not equal to the amount of players in the game, ergo, there are still player's left in the game, it calls the `timer` macro.
 
-![Alt text](./githubimgs/gmwr.png"")
+![Alt text](./githubimgs/gmwr.png "")
 
 [ Figure 51. GM_WRECKAGE_RUMBL setting max time and calling timer macro every tick if the game has not ended ]
 
 Within the `timer` macro, there is a delay that is set to 1 second, which when complete, subtracts 1 from a variable, `realTime` if it is larger than 0. If not, it checks if it is less than 0, and if so, it opens the lobby level. Otherwise, it checks for all players on the map if `isOnRubble` is true and if `isNearOtherPlayer` is true. If either are true, the player is killed and then executes the code to send the scores to the game instance, spawn power ups, and relevant to the timer itself, reset it. 
  
-![Alt text](./githubimgs/timersubtractwr.png"")
+![Alt text](./githubimgs/timersubtractwr.png "")
 
 [ Figure 52. Timer macro logic for making the timer tick down]
 
 The timer resets by setting it to the `maxTime`, a variable equal to the default value of `realTime`, subtracted by a `subtractor` integer, which is currently set to 2 but can be changed for balancing reasons. In practice, this allows for the timer to become smaller and smaller upon resetting, quickening the pace of each round of the game. 
 
  
-![Alt text](./githubimgs/timerreset.png"")
+![Alt text](./githubimgs/timerreset.png "")
 
 [ Figure 53. Timer resetting with 2 subtracted every round]
 
@@ -430,7 +430,7 @@ The timer resets by setting it to the `maxTime`, a variable equal to the default
 In `GM_WRECKAGE_RUMBL`, there is a function called `sendScoresToGameInstance`. It gets the player controller of a player killed in the game, whether it is by the cannon, by drowning when the timer is up, or by being too close to a player when the timer ends. A variable, `deathToll` is incremented by 1 every time a player dies. `deathToll` is the multiplied by a variable `scoremult`, incase the game designers want to scale the scores to a different magnitude than increments of 1. Then, `GI_PlunderParty` is casted and it is then checked what the player ID is. The game then passes the score to the corresponding player score in the game instance depending on the ID
 
  
-![Alt text](./githubimgs/sendscoreswr.png"")
+![Alt text](./githubimgs/sendscoreswr.png "")
 
 [ Figure 54. sendScoresToGameInstance macro in Wreckage Rumble]
 
@@ -439,11 +439,11 @@ In `GM_WRECKAGE_RUMBL`, there is a function called `sendScoresToGameInstance`. I
 
 Within the `timer` macro of `GM_WRECKAGE_RUMBL` , once the timer resets, it spawns the cannon and tile destroying power ups `BP_Boat_Powerup` and `BP_Shark_Powerup` within the plane the game takes place in, its location determined is randomly via two `Random Float in Range` nodes for the X and Y component, while Z stays constant
 
-![Alt text](./githubimgs/spawn.png"")
+![Alt text](./githubimgs/spawn.png "")
 
 [ Figure 55. Spawning power up logic in timer macro that is triggered after every round ends]
 
-![Alt text](./githubimgs/spawn.gif"")
+![Alt text](./githubimgs/spawn.gif "")
 
 [ Figure 56. Timer resetting and spawning the power ups]
 
@@ -453,23 +453,23 @@ Once the game was connected to the lobby score system, it was known that the pow
 
 The cannons function by killing the player on rubble, the green tiles, if the player collides with `BP_Cannonball`. If this occurs, it calls an event in `BP_WREACKAGE_RUMBLE_Character`, called `Death`, and passes through the ID of the player being killed. 
 
-![Alt text](./githubimgs/cannonwr.png"")
+![Alt text](./githubimgs/cannonwr.png "")
 
 [ Figure 57. BP_Cannonball calling `death`]
 
 In `BP_WREACKAGE_RUMBLE_Character`, `Death` activates the player's mesh to simulate physics, allows collision, disabled input in the player, and then calls an event in `GM_WRECKAGE_RUMBL`, called `cannonBallDeath`
 
-![Alt text](./githubimgs/cannonwr.png"")
+![Alt text](./githubimgs/cannonwr.png "")
 
 [ Figure 58. BP_WREACKAGE_RUMBLE_Character calling cannonBallDeath]
 
 In `GM_WRECKAGE_RUMBL`, `cannonBallDeath` then passes the player index to `sendScoresToGameInstance`
 
-![Alt text](./githubimgs/cannonwrscore.png"")
+![Alt text](./githubimgs/cannonwrscore.png "")
 
 [ Figure 59. cannonBallDeath calling sendScoresToGameInstance in GM_WRECKAGE_RUMBL ]
 
-![Alt text](./githubimgs/cannonwr.gif"")
+![Alt text](./githubimgs/cannonwr.gif "")
 
 [ Figure 60. BP_Cannonball killing a player on a green tile]
 
@@ -495,11 +495,11 @@ In total, the game amassed 9 playtesters, 8 of which being unique, as a repeat p
 
 The interact UI was quite a bother to a lot of play testers, which is quite understandable. However, with it being such an issue to implement, trying to make each actor spawn an additional one on top is a task too daunting, especially for how late playtesting was and there were more pressing bugs.
 
-![Alt text](./githubimgs/ssratings.png"")
+![Alt text](./githubimgs/ssratings.png "")
 
 [ Figure 61. Ratings of Storm Strider]
 
-![Alt text](./githubimgs/ssfeedback.png"")
+![Alt text](./githubimgs/ssfeedback.png "")
 
 [ Figure 62. Feedback of Storm Strider]
 
@@ -526,11 +526,11 @@ Overall negative reviews, which makes sense. It has the least work put into it a
 The final playtests did indicate that the game is quite fun as is, which is great from a programming side of things as it is functionally complete and is fun despite no art direction.
 
 
-![Alt text](./githubimgs/wrratings.png"")
+![Alt text](./githubimgs/wrratings.png "")
 
 [ Figure 63. Ratings of Wreckage Rumble]
 
-![Alt text](./githubimgs/wrfeedback.png"")
+![Alt text](./githubimgs/wrfeedback.png "")
 
 [ Figure 64. Feedback of Wreckage Rumble]
 
@@ -552,11 +552,11 @@ The bug relating to players not dying, was unable to be fixed. So instead of a s
 
 The most positively received of the games, which makes sense. It has the most visual polish and it has been mechanically functional for the longest of the three games. The most negative feedback was simply suggestions regarding even more visual polish for clarity, and collision not matching with the visuals. Some did not understand the shield protecting the player from attacks, some wanted a visual for the reload of the cannons. 
 
-![Alt text](./githubimgs/laratings.png"")
+![Alt text](./githubimgs/laratings.png "")
 
 [ Figure 65. Ratings of Land Ahoy]
 
-![Alt text](./githubimgs/lafeedback.png"")
+![Alt text](./githubimgs/lafeedback.png "")
 
 [ Figure 66. Feedback of Land Ahoy]
 
